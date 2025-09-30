@@ -1,0 +1,39 @@
+{% extends "dashboard/base/base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Repairs</h2>
+    <a href="{% url 'repair_add_page' %}" class="btn btn-primary mb-3">+ Add Repair</a>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Bike</th>
+                <th>Description</th>
+                <th>Cost</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for repair in repairs %}
+            <tr>
+                <td>{{ repair.bike.brand }} {{ repair.bike.model }}</td>
+                <td>{{ repair.description }}</td>
+                <td>₱{{ repair.cost }}</td>
+                <td><span class="badge bg-info">{{ repair.get_status_display }}</span></td>
+                <td>{{ repair.created_at|date:"Y-m-d H:i" }}</td>
+                <td>
+                    <a href="{% url 'repair_edit_page' repair.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'repair_delete_page' repair.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="6" class="text-center">No repairs found.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "dashboard/base/base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Bike - {{ bike.brand }} {{ bike.model }}</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

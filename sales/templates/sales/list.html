@@ -1,0 +1,30 @@
+{% extends "dashboard/base/base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<h2>Sales List</h2>
+<a href="{% url 'sale_add_page' %}" class="btn btn-primary mb-3">Record New Sale</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Bike</th>
+      <th>Customer</th>
+      <th>Price</th>
+      <th>Sold By</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sale in sales %}
+      <tr>
+        <td><a href="{% url 'sale_detail_page' sale.pk %}">{{ sale.bike.brand }} {{ sale.bike.model }}</a></td>
+        <td>{{ sale.customer_name }}</td>
+        <td>₱{{ sale.selling_price }}</td>
+        <td>{{ sale.sold_by }}</td>
+        <td>{{ sale.sale_date }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

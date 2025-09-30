@@ -1,0 +1,12 @@
+{% extends "dashboard/base/base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<h2>Record New Sale</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-success">Save Sale</button>
+</form>
+{% endblock %}

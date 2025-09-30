@@ -1,0 +1,53 @@
+{% extends "dashboard/base/base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Bike Details</h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>Brand</th>
+            <td>{{ bike.brand }}</td>
+        </tr>
+        <tr>
+            <th>Model</th>
+            <td>{{ bike.model }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>
+                {% if bike.image %}
+                    <img src="{{ bike.image.url }}" class="img-fluid" alt="{{ bike.brand }} {{ bike.model }}" style="max-height:200px;">
+                {% else %}
+                    <span>No image available</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>Serial Number</th>
+            <td>{{ bike.serial_number }}</td>
+        </tr>
+        <tr>
+            <th>Purchase Price</th>
+            <td>₱{{ bike.purchase_price }}</td>
+        </tr>
+        <tr>
+            <th>Condition</th>
+            <td>{{ bike.get_condition_display }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ bike.get_status_display }}</td>
+        </tr>
+        <tr>
+            <th>Purchase Date</th>
+            <td>{{ bike.purchase_date }}</td>
+        </tr>
+    </table>
+
+    <a href="{% url 'bike_list_page' %}" class="btn btn-secondary">Back to List</a>
+    <a href="{% url 'bike_edit_page' bike.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'bike_delete_page' bike.pk %}" class="btn btn-danger">Delete</a>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "dashboard/base/base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="header-body">
+    <div class="row">
+      <div class="col-xl-2 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">Total Bikes</h5>
+                <span class="h2 font-weight-bold mb-0">{{ total_bikes }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">Bikes Under Repair</h5>
+                <span class="h2 font-weight-bold mb-0">{{ bikes_under_repair }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">Bikes for Sale</h5>
+                <span class="h2 font-weight-bold mb-0">{{ bikes_ready_for_sale }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">Bikes sold</h5>
+                <span class="h2 font-weight-bold mb-0">{{ bikes_sold }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">Total Sales</h5>
+                <span class="h2 font-weight-bold mb-0">Php. {{ total_sales|floatformat:2 }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">Profit</h5>
+                <span class="h2 font-weight-bold mb-0">Php. {{ profit|floatformat:2 }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="mt-4">Sales List</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Bike</th>
+        <th>Customer</th>
+        <th>Initial + Repair Cost</th>
+        <th>Selling Price</th>
+        <th>Profit</th>
+        <th>Sold By</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sale in sales_list %}
+        <tr>
+          <td><a href="{% url 'sale_detail_page' sale.pk %}">{{ sale.bike.brand }} {{ sale.bike.model }}</a></td>
+          <td>{{ sale.customer_name }}</td>
+          <td>₱{{ sale.bike.total_cost }}</td>
+          <td>₱{{ sale.selling_price }}</td>
+          <td>₱{{ sale.profit }}</td>
+          <td>{{ sale.sold_by }}</td>
+          <td>{{ sale.sale_date }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}

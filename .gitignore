@@ -1,0 +1,60 @@
+# Django
+*.pyc
+__pycache__/
+db.sqlite3
+*.sqlite3
+*.log
+
+# Django media and static files
+/media/
+/staticfiles/
+/static/
+
+# Environment variables
+.env
+.env.*
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Migrations
+*/migrations/*.pyc
+*/migrations/__pycache__/
+*/migrations/*.py
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Test output
+test-results/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Local settings
+local_settings.py
+
+# Virtual environments
+venv/
+.venv
+
+
+bikes/images/
