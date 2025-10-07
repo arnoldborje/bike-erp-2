@@ -6,8 +6,8 @@ db.sqlite3
 *.log
 
 # Django media and static files
-/media/
-/staticfiles/
+**/*/media/
+**/*/staticfiles/
 /static/
 
 # Environment variables
