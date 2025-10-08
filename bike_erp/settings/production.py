@@ -2,4 +2,4 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOST = ['*']
+ALLOWED_HOSTS = ['*']
