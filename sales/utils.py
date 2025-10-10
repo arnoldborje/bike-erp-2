@@ -1,6 +1,9 @@
+from django.template.loader import render_to_string
 from mailjet_rest import Client
 import os
 from dotenv import load_dotenv
+
+from sales.models import Sale
 
 load_dotenv()
 
@@ -12,7 +15,7 @@ api_secret = os.getenv("MAILJET_API_SECRET")
 mailjet = Client(auth=(api_key, api_secret), version='v3.1')
 
 
-def send_mailjet_email(to_email, to_name):
+def send_mailjet_email(to_email, to_name, sale: Sale):
     """
     Send an email using Mailjet API.
     
@@ -20,6 +23,9 @@ def send_mailjet_email(to_email, to_name):
         to_email (str): Recipient email address
         to_name (str): Recipient name
     """
+    
+    html_body = render_to_string('sales/email.html', {'email': to_email, 'name': to_name, 'sale': sale})
+    
     data = {
         'Messages': [
             {
@@ -35,9 +41,7 @@ def send_mailjet_email(to_email, to_name):
                 ],
                 "Subject": "Purchase Report",
                 "TextPart": "Thank you for buying from us.",
-                "HTMLPart": """
-                    <h3>Thank you for buying from us.</h3>
-                """
+                "HTMLPart": html_body
             }
         ]
     }

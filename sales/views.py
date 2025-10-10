@@ -30,7 +30,7 @@ def sale_add_page(request):
 
             sale.bike.save()
 
-            send_mailjet_email(to_email=form.cleaned_data['customer_email'], to_name=form.cleaned_data['customer_name'])
+            send_mailjet_email(to_email=form.cleaned_data['customer_email'], to_name=form.cleaned_data['customer_name'], sale=sale)
             
             return redirect("sale_list_page")
     else:
