@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group  
 from django.shortcuts import render, redirect
 
+def home_page(request):
+    return redirect("dashboard_page")
 
 def login_page(request):
     if request.method == "POST":
