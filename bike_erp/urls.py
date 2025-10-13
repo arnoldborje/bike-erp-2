@@ -6,9 +6,10 @@ from django.views.static import serve
 from django.urls import re_path
 
 
-from .views import login_page, logout_page, register_page
+from .views import login_page, logout_page, register_page, home_page
 
 urlpatterns = [
+    path('', home_page, name='home_page'),
     path('admin/', admin.site.urls),
     path('dashboard/', include('dashboard.urls')),
     path('login/', login_page, name='login_page'),
