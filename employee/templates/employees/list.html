@@ -5,6 +5,9 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Employees</h2>
+
+    <a href="{% url 'employee_add_page' %}" class="btn btn-primary mb-3">+ Add New Employee</a>
+    
     <table class="table table-striped">
         <thead>
             <tr>

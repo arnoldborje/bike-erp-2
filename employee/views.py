@@ -19,22 +19,12 @@ def employee_add_page(request):
     if request.method == 'POST':
         form = EmployeeForm(request.POST)
         if form.is_valid():
-            # Create User first
-            user = User.objects.create_user(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password'],
-                first_name=form.cleaned_data['first_name'],
-                last_name=form.cleaned_data['last_name'],
-                email=form.cleaned_data['email'],
-            )
-            # Create Employee linked to User
-            employee = form.save(commit=False)
-            employee.user = user
-            employee.save()
-            return redirect('employee_list')
+            form.save()  # works automatically for ModelForm
+            return redirect('employee_list_page')  # redirect to a page of your choice
     else:
         form = EmployeeForm()
-    return render(request, 'employees/add.html', {'form': form, 'title': 'Add Employee'})
+
+    return render(request, 'employees/add.html', {'form': form})
 
 
 @login_required
@@ -44,10 +34,12 @@ def employee_edit_page(request, pk):
         form = EmployeeForm(request.POST, instance=employee)
         if form.is_valid():
             form.save()
-            return redirect('employee_list')
+            return redirect('employee_list_page')
     else:
         form = EmployeeForm(instance=employee)
-    return render(request, 'employees/edit.html', {'form': form, 'title': 'Edit Employee'})
+    return render(request, 'employees/edit.html', {
+        'form': form,
+    })
 
 
 @login_required
@@ -55,5 +47,5 @@ def employee_delete_page(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
     if request.method == 'POST':
         employee.delete()
-        return redirect('employee_list')
+        return redirect('employee_list_page')
     return render(request, 'employees/delete.html', {'employee': employee})
