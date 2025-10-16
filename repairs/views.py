@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Repair
 from .forms import RepairForm
 from django.contrib.auth.decorators import login_required
+from decorator.check_role import role_required
 
 
 @login_required
+@role_required(allowed_roles=['admin', 'mechanic'])
 def repair_list_page(request):
     repairs = Repair.objects.select_related('bike').all()
     
@@ -12,12 +14,14 @@ def repair_list_page(request):
 
 
 @login_required
+@role_required(allowed_roles=['admin', 'mechanic'])
 def repair_detail_page(request, pk):
     repair = get_object_or_404(Repair, pk=pk)
     return render(request, 'repairs/detail.html')
 
 
 @login_required
+@role_required(allowed_roles=['admin', 'mechanic'])
 def repair_add_page(request):
     if request.method == 'POST':
         form = RepairForm(request.POST)
@@ -30,6 +34,7 @@ def repair_add_page(request):
 
 
 @login_required
+@role_required(allowed_roles=['admin', 'mechanic'])
 def repair_edit_page(request, pk):
     repair = get_object_or_404(Repair, pk=pk)
     if request.method == 'POST':
@@ -44,6 +49,7 @@ def repair_edit_page(request, pk):
     
 
 @login_required
+@role_required(allowed_roles=['admin', 'mechanic'])
 def repair_delete_page(request, pk):
     repair = get_object_or_404(Repair, pk=pk)
     if request.method == 'POST':

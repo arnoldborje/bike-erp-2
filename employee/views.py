@@ -3,9 +3,11 @@ from django.contrib.auth.models import User
 from .models import Employee
 from .forms import EmployeeForm
 from django.contrib.auth.decorators import login_required
+from decorator.check_role import role_required
 
 
 @login_required
+@role_required(allowed_roles=['admin'])
 def employee_list_page(request):
     employees = Employee.objects.all()
     
@@ -15,6 +17,7 @@ def employee_list_page(request):
 
 
 @login_required
+@role_required(allowed_roles=['admin'])
 def employee_add_page(request):
     if request.method == 'POST':
         form = EmployeeForm(request.POST)
@@ -28,6 +31,7 @@ def employee_add_page(request):
 
 
 @login_required
+@role_required(allowed_roles=['admin'])
 def employee_edit_page(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
     if request.method == 'POST':
@@ -43,6 +47,7 @@ def employee_edit_page(request, pk):
 
 
 @login_required
+@role_required(allowed_roles=['admin'])
 def employee_delete_page(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
     if request.method == 'POST':

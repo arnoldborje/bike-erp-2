@@ -79,7 +79,8 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+             {% if request.user.employee_profile.role == "sales" or request.user.employee_profile.role == "admin" %}
+                            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSale"
                     aria-expanded="true" aria-controls="collapseSale">
                     <i class="fas fa-fw fa-cog"></i>
@@ -94,8 +95,10 @@
                     </div>
                 </div>
             </li>
+             {% endif %}
 
             <!-- Nav Item - Utilities Collapse Menu -->
+             {% if request.user.employee_profile.role == "mechanic" or request.user.employee_profile.role == "admin" %}
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRepair"
                     aria-expanded="true" aria-controls="collapseRepair">
@@ -110,8 +113,10 @@
                     </div>
                 </div>
             </li>
+            {% endif %}
 
-                        <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- Nav Item - Utilities Collapse Menu -->
+            {% if request.user.employee_profile.role == "admin" %}
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee"
                     aria-expanded="true" aria-controls="collapseEmployee">
@@ -126,7 +131,7 @@
                     </div>
                 </div>
             </li>
-
+            {% endif %}
         </ul>
         <!-- End of Sidebar -->
 
